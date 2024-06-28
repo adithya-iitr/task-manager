@@ -30,6 +30,7 @@ function App() {
   }
   function handleSelect(id){
     setSelectedProject(prevSelectedProject=>prevSelectedProject=projectData.filter(project=>project.id===id)) 
+    setAddedProject(prevAddProject=>prevAddProject=false)
   }
   function deleteHandler(){
     setSelectedProject(null)
@@ -41,7 +42,7 @@ function App() {
       <ProjectSidebar clickHandler={handleClick} projects={projectData} onSelect={handleSelect}/>
       {(selectedProject===null &&  addProject) && <NewProjects cancelHandler={handleCancel} saveHandler={handleSave}/>}
       {(selectedProject===null &&  !addProject) && <NoProjectSelected clickHandler={handleClick}/>}
-      {(selectedProject!==null &&  !addProject) && <SelectedProject project={selectedProject} projectDetails={projectData} onDelete={deleteHandler}/>}
+      {(selectedProject && selectedProject.length>0) && <SelectedProject project={selectedProject} projectDetails={projectData} onDelete={deleteHandler}/>}
     </main>
     </>
   );
