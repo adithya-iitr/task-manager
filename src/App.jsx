@@ -9,6 +9,7 @@ function App() {
   const [selectedProject, setSelectedProject]=useState(null)
   function handleClick(){
     setAddedProject(prevAddProject=>prevAddProject=true)
+    setSelectedProject(null)
   }
   function handleCancel(){
     setAddedProject(prevAddProject=>prevAddProject=false)
