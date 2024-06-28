@@ -9,7 +9,7 @@ function App() {
   const [selectedProject, setSelectedProject]=useState(null)
   function handleClick(){
     setAddedProject(prevAddProject=>prevAddProject=true)
-    setSelectedProject(null)
+    setSelectedProject(prevSelectedProject=>prevSelectedProject=null)
   }
   function handleCancel(){
     setAddedProject(prevAddProject=>prevAddProject=false)
@@ -19,6 +19,7 @@ function App() {
     setProjectData(prevProjectData=>{
       const newProject={
         ...projectDetails,
+        tasks:[],
         id:Math.random()
       }
       return [
@@ -38,7 +39,9 @@ function App() {
     <>
     <main className="my-8 flex gap-8 h-screen ">
       <ProjectSidebar clickHandler={handleClick} projects={projectData} onSelect={handleSelect}/>
-      {!selectedProject? addProject? <NewProjects cancelHandler={handleCancel} saveHandler={handleSave}/>:<NoProjectSelected clickHandler={handleClick}/>:<SelectedProject project={selectedProject} onDelete={deleteHandler}/>}
+      {(selectedProject===null &&  addProject) && <NewProjects cancelHandler={handleCancel} saveHandler={handleSave}/>}
+      {(selectedProject===null &&  !addProject) && <NoProjectSelected clickHandler={handleClick}/>}
+      {(selectedProject!==null &&  !addProject) && <SelectedProject project={selectedProject} projectDetails={projectData} onDelete={deleteHandler}/>}
     </main>
     </>
   );
