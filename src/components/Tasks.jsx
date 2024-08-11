@@ -18,10 +18,7 @@ export default function Tasks({ projects, projectId }) {
                         task:title, 
                         id:Math.random()
                     }
-                    project={
-                        ...project,
-                        tasks:[...project.tasks,newTask]
-                    }
+                    project.tasks=project.tasks.find(task=>task.task===newTask.task)?project.tasks:[...project.tasks,newTask];
                     return project;
                 }
                 else{
