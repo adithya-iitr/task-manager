@@ -9,7 +9,7 @@ function App() {
   const [selectedProject, setSelectedProject]=useState(null)
   function handleClick(){
     setAddedProject(prevAddProject=>prevAddProject=true)
-    setSelectedProject(prevSelectedProject=>prevSelectedProject=null)
+    setSelectedProject(null)
   }
   function handleCancel(){
     setAddedProject(prevAddProject=>prevAddProject=false)
@@ -29,7 +29,7 @@ function App() {
     })
   }
   function handleSelect(id){
-    setSelectedProject(prevSelectedProject=>prevSelectedProject=projectData.filter(project=>project.id===id)) 
+    setSelectedProject(()=>projectData.filter(project=>project.id===id)) 
     setAddedProject(prevAddProject=>prevAddProject=false)
   }
   function deleteHandler(){
